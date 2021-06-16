@@ -4,7 +4,7 @@
   <h1>Articles</h1>
 </div>
 <br>
-<h1 class="text-warning">Hi! this blog has <em><%= Article.public_count %> public </em> articles and counting!</h1>
+<h1 class="text-primary">Hi! <strong><%= @current_user.name %></strong> you have <em><%= Article.self_articles_count(@current_user.id.to_i) %> </em> articles and counting!</h1>
 <br>
 <div class="row">
   <% @articles.each do |a|%>

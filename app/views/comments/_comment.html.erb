@@ -1,16 +1,24 @@
 <div class="col col-lg-4">
   <div class="card border-secondary mb-3" style="max-width: 20rem;">
-    <div class="card-header"><strong>Commenter:</strong><%= comment.commenter %></div>
+    <div class="card-header">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
+              class="bi bi-person-circle" viewBox="0 0 16 16" >
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+        <path fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+      </svg>
+      <%= comment.commenter %>
+    </div>
     <div class="card-body">
       <h4 class="card-title"><strong>Comment:</strong></h4>
       <p class="card-text"><%= comment.body %></p>
-      <p>
-         <%= link_to "Destroy Comment", [ comment.article, comment ],
+      <% if (comment.user_id == current_user.id) or (@article.user_id == current_user.id)  %>
+        <p>
+          <%= button_to "Destroy Comment", [ comment.article, comment ],
                 method: :delete,
                 data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-      </p>
-
+        </p>
+      <% end %>
     </div>
   </div>
 </div>
- 

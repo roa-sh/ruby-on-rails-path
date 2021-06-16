@@ -9,6 +9,8 @@ gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 gem 'sqlite3', '~> 1.4', group: :development
 # (Updated) PostgreSQL Instead of sqlite3
 gem 'pg', group: :production
+#bcrypt for users passwords
+gem 'bcrypt'
 # rails 12 factor
 gem 'rails_12factor'
 # Use Puma as the app server
