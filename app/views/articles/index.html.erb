@@ -1,42 +1,35 @@
-<div align="center">
-<h1>Articles</h1>
+<div style="padding:10px"></div> <%# added by me %> 
 
-Our blog has <%= Article.public_count %> articles and counting!
+  <div class="row">
+  <h1>Articles</h1>
 
-<ul>
-  <% @articles.each do |a|%>
-    <% unless a.archived? %>
-      <li>
-        <%= link_to a.title, a %>
-      </li>
-    <% end %>
-  <%end%>
-</ul>
-
-<%= link_to "New Article", new_article_path %>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
+  <h1 class="text-success">Our blog has <em><%= Article.public_count %> </em> public articles and counting!</h1>
   </div>
+
+
+<div class="row">
+  <% @articles.each do |a|%>
+      <div class="col col-lg-4">
+        <div class="card border-primary mb-3" style="max-width: 20rem;">
+          <div class="card-header"><%= link_to a.title, a %>
+            <% case a.status %>
+            <% when "public" %>
+                    <span class="badge bg-warning" style="float:right">Public</span>
+            <% when "private" %>
+                    <span class="badge bg-dark" style="float:right">Private</span>
+            <% when "archived" %>
+                    <span class="badge bg-danger" style="float:right">Archived</span>
+            <% end%>
+
+          </div>
+          <div class="card-body">
+            <h4 class="card-title"><%= a.title %></h4>
+            <p class="card-text"><%= a.body %></p>
+          </div>
+        </div>
+      </div>        
+  <%end%>
 </div>
 
-</div>
+
+
