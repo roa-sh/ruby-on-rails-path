@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/user/articles', to: 'articles#user_index'
   resources :users
 
+  post '/toggle_follow', to: 'articles#toggle_follow'
   # Sessions
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
