@@ -11,6 +11,10 @@ module Visible
     def public_count
       where(status: 'public').count
     end
+
+    def self_articles_count(user_id)
+      where(user_id: user_id).count
+    end
   end
 
   def archived?
