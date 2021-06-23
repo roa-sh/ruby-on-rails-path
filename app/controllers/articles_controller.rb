@@ -15,13 +15,9 @@ class ArticlesController < ApplicationController
   end
 
   def user_index
-    # if current_user?(params[:id].to_i)
     @articles = Article.all
     @articles = @articles.select { |a| a.user_id == @current_user.id }
     render 'user_index'
-    # else
-    #   redirect_to "/user/#{ current_user.id }"
-    # end
 
   end
     
@@ -29,7 +25,7 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build(article_params)
 
     if @article.save
-      flash[:success] = 'Article haas been created!'
+      flash[:success] = 'Article has been created!'
       redirect_to @article
     else
       render :new 
@@ -63,18 +59,30 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id]) #Instance variable
-    puts "ID DEL USER #{ @current_user.id} ID del ARTICULO #{ @article.user_id}"
-    puts "ART de #{@article.title}, loggeado #{@current_user.id.class}" 
-    puts "Iguales? #{@article.user_id == @current_user.id}"
-    if (@article.user_id == @current_user.id)
-      @article
-    else
-      @visitor = true
+    begin
+      @article = Article.find(params[:id]) #Instance variable
+      if (@article.user_id == @current_user.id)
+        @article
+      else
+        @visitor = true
+      end
+    rescue
+      flash[:alert] = 'This article doesn\'t exist.'
+      redirect_to articles_path
     end
   end
 
- 
+  def toggle_follow
+    toggle = params[:toggle_follow]
+    if Follower.exists?(user_id: toggle[:current_user], following: toggle[:author])
+      follow = Follower.where(user_id: toggle[:current_user], following: toggle[:author])
+      follow = follow.first # first element, bc .where returns an array(in this case of just one element)
+      Follower.destroy(follow.id)
+    else
+      follow = Follower.new(user_id: toggle[:current_user], following: toggle[:author])
+      follow.save
+    end
+  end
 
   private
 
