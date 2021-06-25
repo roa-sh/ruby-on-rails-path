@@ -18,7 +18,6 @@ class ArticlesController < ApplicationController
     @articles = Article.all
     @articles = @articles.select { |a| a.user_id == @current_user.id }
     render 'user_index'
-
   end
     
   def create
