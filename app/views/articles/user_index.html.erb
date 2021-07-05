@@ -1,17 +1,15 @@
-<div style="padding:10px"></div>
-<%# added by me %>
 <div class="row">
   <h1>Articles</h1>
 </div>
 <br>
-<h1 class="text-primary">Hi! <strong><%= @current_user.name %></strong> you have <em><%= Article.self_articles_count(@current_user.id.to_i) %> </em> articles and counting!</h1>
+<h1 class="text-primary">Hi! <strong><%= @current_user.name %></strong> you have <em><%= @current_user.articles.public_count %> </em> articles and counting!</h1>
 <br>
 <div class="row">
   <% @articles.each do |a|%>
     <div class="col col-lg-4">
-      <div class="card border-primary mb-3" style="max-width: 20rem;">
+      <div class="card border-primary mb-3 mw-20rem" >
         <div class="card-header">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
+          <svg xmlns="http://www.w3.org/2000/svg" class="avatar" fill="currentColor"
               class="bi bi-person-circle" viewBox="0 0 16 16" >
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
             <path fill-rule="evenodd"
@@ -19,12 +17,12 @@
           </svg>
           <%= get_author(a.user_id).name%>
           <% case a.status %>
-          <% when "public" %>
-          <span class="badge bg-warning" style="float:right">Public</span>
-          <% when "private" %>
-          <span class="badge bg-dark" style="float:right">Private</span>
-          <% when "archived" %>
-          <span class="badge bg-danger" style="float:right">Archived</span>
+          <% when 'public' %>
+          <span class="badge bg-warning">Public</span>
+          <% when 'private' %>
+          <span class="badge bg-dark" >Private</span>
+          <% when 'archived' %>
+          <span class="badge bg-danger">Archived</span>
         <% end%>
       </div>
       <div class="card-body">
