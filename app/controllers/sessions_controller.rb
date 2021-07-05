@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
-
+  helper_method :current_user, :log_out, :current_user?, :log_in
   # Render the new.html.erb template (The login form)
   def new
-
   end
 
   # Don't render a template, just create the session
@@ -22,4 +21,18 @@ class SessionsController < ApplicationController
     log_out
     redirect_to root_url
   end
+
+  def log_in(user)
+    session[:user_id] = user.id
+  end
+
+  def log_out
+    session.delete(:user_id)
+    @current_user = nil
+  end
+
+  def current_user?(user) 
+    user == current_user
+  end
+
 end

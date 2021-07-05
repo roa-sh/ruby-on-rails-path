@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Visible
   has_many :articles
   has_secure_password
   before_save { self.email = email.downcase }

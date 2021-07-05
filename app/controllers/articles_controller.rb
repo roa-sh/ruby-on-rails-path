@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-
   before_action :logged_in_user
 
   def home
@@ -8,10 +7,9 @@ class ArticlesController < ApplicationController
   def new
     @article = current_user.articles.new
   end
-  
-  def index
-    @articles = Article.all.select {|a| a.status == 'public'}
 
+  def index
+    @articles = Article.all.select { |a| a.status == 'public' }
   end
 
   def user_index
@@ -19,7 +17,7 @@ class ArticlesController < ApplicationController
     @articles = @articles.select { |a| a.user_id == @current_user.id }
     render 'user_index'
   end
-    
+
   def create
     @article = current_user.articles.build(article_params)
 
@@ -27,7 +25,7 @@ class ArticlesController < ApplicationController
       flash[:success] = 'Article has been created!'
       redirect_to @article
     else
-      render :new 
+      render :new
     end
   end
 
@@ -45,7 +43,7 @@ class ArticlesController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @article = current_user.articles.find(params[:id])
     if @article
@@ -59,8 +57,8 @@ class ArticlesController < ApplicationController
 
   def show
     begin
-      @article = Article.find(params[:id]) #Instance variable
-      if (@article.user_id == @current_user.id)
+      @article = Article.find(params[:id]) # Instance variable
+      if @article.user_id == @current_user.id
         @article
       else
         @visitor = true
@@ -72,15 +70,15 @@ class ArticlesController < ApplicationController
   end
 
   def toggle_follow
-    toggle = params[:toggle_follow]
-    if Follower.exists?(user_id: toggle[:current_user], following: toggle[:author])
-      follow = Follower.where(user_id: toggle[:current_user], following: toggle[:author])
+    if Follower.exists?(user_id: params[:current_user], following: params[:author])
+      follow = Follower.where(user_id: params[:current_user], following: params[:author])
       follow = follow.first # first element, bc .where returns an array(in this case of just one element)
       Follower.destroy(follow.id)
     else
-      follow = Follower.new(user_id: toggle[:current_user], following: toggle[:author])
+      follow = Follower.new(user_id: params[:current_user], following: params[:author])
       follow.save
     end
+    redirect_back(fallback_location: root_path)
   end
 
   private
@@ -88,5 +86,4 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title, :body, :status)
   end
-
 end

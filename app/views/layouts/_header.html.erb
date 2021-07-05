@@ -9,17 +9,13 @@
       <% if logged_in? %>
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="/articles">Articles
-              <span class="visually-hidden">(current)</span>
-            </a>
+            <%= link_to 'Articles', articles_path, class: 'nav-link active' %>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/user/articles">My Articles
-              <span class="visually-hidden">(current)</span>
-            </a>
+            <%= link_to 'My Articles', user_articles_path, class: 'nav-link active' %>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<%=" /articles/new" %>">New Article</a>
+          <li>
+            <%= link_to 'New Article', new_article_path, class: 'nav-link' %>
           </li>
         </ul>
         <ul class="nav navbar-right ">

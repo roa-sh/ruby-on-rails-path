@@ -180,6 +180,11 @@ small, .small {
   font-size: 0.875em;
 }
 
+.avatar {
+  width:20px;
+  height:20px;
+  fill:currentColor;
+}
 mark, .mark {
   padding: 0.2em;
   background-color: #fcf8e3;
@@ -359,6 +364,7 @@ button:not(:disabled),
 
 textarea {
   resize: vertical;
+  height:200px;
 }
 
 fieldset {
@@ -4232,7 +4238,12 @@ textarea.form-control-lg {
   color: #fff;
 }
 
+.right_floating_box{
+  float: right;
+}
+
 .card {
+  margin-top: 1rem;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -4618,6 +4629,7 @@ textarea.form-control-lg {
   font-weight: 700;
   line-height: 1;
   color: #fff;
+  float: right;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
@@ -6566,6 +6578,10 @@ textarea.form-control-lg {
 
 .mw-100 {
   max-width: 100% !important;
+}
+
+.mw-20rem {
+  max-width: 20rem;
 }
 
 .vw-100 {

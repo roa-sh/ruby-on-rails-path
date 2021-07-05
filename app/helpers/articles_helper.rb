@@ -5,12 +5,8 @@ module ArticlesHelper
 
   def following?(author)
     following = Follower.where(user_id: current_user.id).to_a
-    following = following.map {|f| f.following}
+    following = following.map { |f| f.following }
     puts "Following to: #{following}, Author:#{author}"
     following.include?(author)
   end
-
-  
-  
-
 end

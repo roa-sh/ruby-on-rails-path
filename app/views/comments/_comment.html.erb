@@ -1,7 +1,7 @@
 <div class="col col-lg-4">
-  <div class="card border-secondary mb-3" style="max-width: 20rem;">
+  <div class="card border-secondary mb-3 mw-20rem">
     <div class="card-header">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
+      <svg xmlns="http://www.w3.org/2000/svg" class="avatar" fill="currentColor"
               class="bi bi-person-circle" viewBox="0 0 16 16" >
         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
         <path fill-rule="evenodd"
@@ -14,9 +14,9 @@
       <p class="card-text"><%= comment.body %></p>
       <% if (comment.user_id == current_user.id) or (@article.user_id == current_user.id)  %>
         <p>
-          <%= button_to "Destroy Comment", [ comment.article, comment ],
+          <%= button_to 'Destroy Comment', [ comment.article, comment ],
                 method: :delete,
-                data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         </p>
       <% end %>
     </div>
